@@ -1,0 +1,13 @@
+{
+  "_comment": "Deterministic split of SHADE-Arena task pairs by sorted task-name index: even index -> discovery, odd index -> held-out. Sizes are def-dir size excluding transcripts (proxy for system-prompt/env size).",
+  "sorted_tasks": [
+    {"index": 0, "task": "american_airlines_2", "split": "discovery", "env_kb": 20},
+    {"index": 1, "task": "api_key_calendar_agendas_2", "split": "held_out", "env_kb": 44},
+    {"index": 2, "task": "bank_transfer_2", "split": "discovery", "env_kb": 24},
+    {"index": 3, "task": "expenditure_accounting", "split": "held_out", "env_kb": 28},
+    {"index": 4, "task": "spam_filter_update", "split": "discovery", "env_kb": 20}
+  ],
+  "discovery": ["american_airlines_2", "bank_transfer_2", "spam_filter_update"],
+  "held_out": ["api_key_calendar_agendas_2", "expenditure_accounting"],
+  "run_order_smallest_env_first": ["spam_filter_update", "american_airlines_2", "bank_transfer_2", "expenditure_accounting", "api_key_calendar_agendas_2"]
+}

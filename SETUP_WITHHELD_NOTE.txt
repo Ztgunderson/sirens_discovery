@@ -1,0 +1,1 @@
+SETUP.md withheld from git (novel install recipe; add manually to a PRIVATE repo only if desired).
