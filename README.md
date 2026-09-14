@@ -1,28 +1,34 @@
-# HANDOFF — SHADE resampling-honeypot (reproduce + continue this week)
-Honest scope: this reproduces what we ACTUALLY did. Read docs/STORY.md and docs/VERIFICATION.md FIRST.
+# sirens_discovery — Sirens for Agents: resampling-derived, action-level honeypot discovery
 
-## What is here
-- code/run_probe.py            OUR harness (branch-resampling ReAct loop on SHADE). Built + runs; NOT yet
-                               shown to reach a covert action live (see STORY/VERIFICATION).
-- code/adaptive_probe_DESIGNED_not_run_on_shade.py   the adaptive ladder+SPRT+allocation ENGINE. Designed,
-                               NOT executed on SHADE. This is the core method still to be run.
-- code/run_generation.sh       the BASELINE runner (SHADE's plain N independent episodes) = what produced results.
-- code/replay_through_harness.py, efficiency_sim.py, analyze.py, shade_to_inspect.py   analysis (CPU, read-only).
-- data/transcripts/{benign,rogue}   the ONE task's episodes (spam_filter_update, 5+5) = the actual data.
-- data/harness_demo_trajectory.json  one harness episode (benign tools only; no covert action reached).
-- data/shade_probe.eval        Inspect traces (view with inspect view).
-- docs/                        STORY (the honest narrative), VERIFICATION (triangulation + corrections),
-                               RESULTS_pilot (numbers + BS audit), REVIEW_method_vs_results, PREREG, PLAN, notebook.
+Minimum artifact to recreate our Apart AI Incident Response sprint work (Sep 2026).
 
-## Reproduce the RESULTS (no GPU, minutes)
-1. Setup SHADE per SETUP.md (INTERNAL: novel install recipe, withhold from public repo pending review).
-2. Numbers: python code/analyze.py ; python code/efficiency_sim.py ; python code/replay_through_harness.py
-   (paths assume the SHADE checkout at ../shade with data/transcripts in place).
+**One line.** We probe a black-box agent at the ACTION level (no chain-of-thought), resampling its behavior on a
+real third-party sabotage benchmark (SHADE-Arena) to discover covert-behavior "honeypot" affordances, then
+distill a cheap tripwire. **Honest headline finding: the bottleneck is discovery, not detection, and it is
+compute-bound.**
 
-## Continue this week (the real next experiment)
-Run code/adaptive_probe_* (the ladder+SPRT+allocation) ON SHADE via the run_probe harness, on faster hardware
-or a served model, across >=3 tasks, with argument-level detection. That is the untested core.
+## What is honestly here (and not)
+- The harness runs on SHADE and a control-anchored action detector separated completed harm from benign (2/2,
+  0/5) and out-flagged SHADE's own monitor once — but this is STRUCTURAL (harm needs a dedicated tool) and n=2.
+- The adaptive, resource-efficient engine (subset-simulation ladder + SPRT + allocation) is SPECIFIED and
+  released but NOT yet validated: a full episode did not finish in 3h on local hardware.
+- Read `docs/STORY.md` and `docs/VERIFICATION.md` FIRST — they state exactly what ran, what didn't, and the caveats.
 
-## Honest one-liner
-Method + harness built and specified; BASELINE (plain resampling + post-hoc control-anchored detector) gave a
-structural n=2 result on 1 task; the ADAPTIVE core was not run. Do not overclaim.
+## Layout
+- `code/` — `run_probe.py` (the harness: action-level branch resampling on SHADE) · `adaptive_probe_DESIGNED_not_run_on_shade.py` (the adaptive engine; core, still to run) · `run_generation.sh` (plain-resampling baseline) · `analyze.py`, `efficiency_sim.py`, `replay_through_harness.py`, `shade_to_inspect.py`.
+- `data/` — the one completed task's transcripts (spam_filter_update, 5 benign + 5 rogue), a harness demo trajectory, Inspect traces (`shade_probe.eval`), and the task split.
+- `docs/` — STORY, VERIFICATION, RESULTS_pilot (+ BS audit), REVIEW_method_vs_results, RESULTS_SECTION_draft, REPORT_TEMPLATE, REFERENCES, PREREG, PLAN, and `review.ipynb`.
+
+## Reproduce the results (CPU, minutes, no model calls)
+Point the analysis at the transcripts in `data/` and run: `python code/analyze.py`, `python code/efficiency_sim.py`,
+`python code/replay_through_harness.py`. View traces with an Inspect viewer on `data/shade_probe.eval`.
+
+## Reproduce the runs (needs the model + benchmark)
+Serve a black-box model (we used qwen3.6-35b on local vLLM, OpenAI-compatible) and set up SHADE-Arena
+(github: jkutaso/SHADE-Arena). **The SHADE-on-aarch64 install recipe is withheld from this public repo per the
+sprint's disclosure rule** (do not release novel installation recipes without review); available on request
+pending review.
+
+## Status & attribution
+Sprint artifact, honest and unfinished. Author: Zachary Gunderson. Pipeline/harness built with Claude Code.
+See `docs/REPORT_TEMPLATE.md` for the writeup scaffold.
