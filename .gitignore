@@ -1,0 +1,4 @@
+SETUP.md
+__pycache__/
+*.pyc
+.venv/
