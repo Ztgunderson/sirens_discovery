@@ -2,3 +2,5 @@ SETUP.md
 __pycache__/
 *.pyc
 .venv/
+STATUS.md
+docs/REPORT_TEMPLATE.md
