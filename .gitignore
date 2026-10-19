@@ -4,3 +4,7 @@ __pycache__/
 .venv/
 STATUS.md
 docs/REPORT_TEMPLATE.md
+
+# notes stay local: only README markdown is tracked
+*.md
+!README.md
