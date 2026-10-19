@@ -12,12 +12,12 @@ compute-bound.**
   0/5) and out-flagged SHADE's own monitor once — but this is STRUCTURAL (harm needs a dedicated tool) and n=2.
 - The adaptive, resource-efficient engine (subset-simulation ladder + SPRT + allocation) is SPECIFIED and
   released but NOT yet validated: a full episode did not finish in 3h on local hardware.
-- Read `docs/STORY.md` and `docs/VERIFICATION.md` FIRST — they state exactly what ran, what didn't, and the caveats.
+- Project page with results, caveats, and done vs not done: https://ztgunderson.github.io/sirens_discovery/ (source: `docs/index.html`).
 
 ## Layout
 - `code/` — `run_probe.py` (the harness: action-level branch resampling on SHADE) · `adaptive_probe_DESIGNED_not_run_on_shade.py` (the adaptive engine; core, still to run) · `run_generation.sh` (plain-resampling baseline) · `analyze.py`, `efficiency_sim.py`, `replay_through_harness.py`, `shade_to_inspect.py`.
 - `data/` — the one completed task's transcripts (spam_filter_update, 5 benign + 5 rogue), a harness demo trajectory, Inspect traces (`shade_probe.eval`), and the task split.
-- `docs/` — STORY, VERIFICATION, RESULTS_pilot (+ BS audit), REVIEW_method_vs_results, RESULTS_SECTION_draft, REPORT_TEMPLATE, REFERENCES, PREREG, PLAN, and `review.ipynb`.
+- `docs/` — the project page (`index.html`), figure 1 (`code/make_fig1.py` regenerates it from `data/`), and `review.ipynb`.
 
 ## Reproduce the results (CPU, minutes, no model calls)
 Point the analysis at the transcripts in `data/` and run: `python code/analyze.py`, `python code/efficiency_sim.py`,
@@ -30,5 +30,4 @@ sprint's disclosure rule** (do not release novel installation recipes without re
 pending review.
 
 ## Status & attribution
-Sprint artifact, honest and unfinished. Author: Zachary Gunderson. Pipeline/harness built with Claude Code.
-See `docs/REPORT_TEMPLATE.md` for the writeup scaffold.
+Sprint artifact, parked 2026-10-19, unfinished. Author: Zachary Gunderson. Pipeline/harness built with Claude Code.
